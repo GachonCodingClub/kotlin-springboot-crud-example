@@ -1,4 +1,5 @@
 package com.example.demo.module.entity
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import org.hibernate.annotations.OnDelete
 import org.hibernate.annotations.OnDeleteAction
@@ -16,9 +17,11 @@ class Board(
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "userId")
     val user: User,
+
     @JsonIgnoreProperties("board")
     @OneToMany(mappedBy = "board", fetch = FetchType.LAZY, cascade = [CascadeType.REMOVE])
-    var replyList: List<Comment>,
+    var commentList: List<Comment>
+
 ) {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
